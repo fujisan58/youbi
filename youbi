@@ -7,14 +7,15 @@ import datetime
 import re
 
 days = ["月曜日", "火曜日", "水曜日", "木曜日","金曜日","土曜日","日曜日"]
+eras = {"令和": 2018, "平成": 1988, "昭和": 1925}
 
 def convert(text):
-    m = re.fullmatch(r"令和(\d+)年(\d+)月(\d+)日", text)
+    m = re.fullmatch(r"(令和|平成|昭和)(\d+)年(\d+)月(\d+)日", text)
     if m is None:
         return text
-    year = int(m.group(1)) + 2018
-    month = int(m.group(2))
-    day = int(m.group(3))
+    year = int(m.group(2)) + eras[m.group(1)]
+    month = int(m.group(3))
+    day = int(m.group(4))
     return "{}-{}-{}".format(year, month, day)
 
 def show(text):
