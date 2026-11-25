@@ -20,6 +20,7 @@ def convert(text):
 
 def show(text):
     text = text.replace("/", "-")
+    text = text.replace("元年", "1年")
     text = convert(text)
     try:
         date = datetime.datetime.strptime(text, "%Y-%m-%d")
