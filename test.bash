@@ -10,7 +10,12 @@ ng () {
 res=0
 
 out=$(./youbi 2005-04-01)
+[ "$?" = 0 ] || ng "$LINENO"
 [ "${out}" = "2005-04-01 金曜日" ] || ng "$LINENO"
+
+out=$(./youbi あいう)
+[ "$?" = 1 ] || ng "$LINENO"
+[ "${out}" = "" ] || ng "$LINENO"
 
 [ "${res}" = 0 ] && echo OK
 exit $res
