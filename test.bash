@@ -17,6 +17,10 @@ out=$(./youbi 2005/4/1)
 [ "$?" = 0 ] || ng "$LINENO"
 [ "${out}" = "2005-04-01 金曜日" ] || ng "$LINENO"
 
+out=$(./youbi 令和8年11月25日)
+[ "$?" = 0 ] || ng "$LINENO"
+[ "${out}" = "2026-11-25 水曜日" ] || ng "$LINENO"
+
 out=$(printf "2005-04-01\n1989-01-07\n" | ./youbi)
 [ "$?" = 0 ] || ng "$LINENO"
 [ "${out}" = "$(printf "2005-04-01 金曜日\n1989-01-07 土曜日")" ] || ng "$LINENO"
