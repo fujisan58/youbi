@@ -39,7 +39,9 @@ def show(text):
 
 status = 0
 if len(sys.argv) > 1:
-    status = show(sys.argv[1])
+    for arg in sys.argv[1:]:
+        if show(arg) != 0:
+            status = 1
 else:
     for line in sys.stdin:
         if show(line.strip()) != 0:
