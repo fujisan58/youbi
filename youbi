@@ -8,6 +8,8 @@ import re
 
 days = ["月曜日", "火曜日", "水曜日", "木曜日","金曜日","土曜日","日曜日"]
 eras = {"令和": 2018, "平成": 1988, "昭和": 1925}
+starts = {"令和": (2019, 5, 1), "平成": (1989, 1, 8), "昭和": (1926, 12, 25)}
+ends = {"令和": (9999, 12, 31), "平成": (2019, 4, 30), "昭和": (1989, 1, 7)}
 
 def convert(text):
     m = re.fullmatch(r"(令和|平成|昭和)(\d+)年(\d+)月(\d+)日", text)
@@ -16,6 +18,9 @@ def convert(text):
     year = int(m.group(2)) + eras[m.group(1)]
     month = int(m.group(3))
     day = int(m.group(4))
+    era = m.group(1)
+    if (year, month, day) < starts[m.group(1)] or (year, month, day) > ends[m.group(1)]:
+        return text
     return "{}-{}-{}".format(year, month, day)
 
 def show(text):
